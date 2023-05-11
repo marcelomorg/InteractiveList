@@ -39,6 +39,5 @@ public class ProductMinDTO {
 
     public String getShortDescription() {
         return shortDescription;
-    }    
-
+    }
 }
