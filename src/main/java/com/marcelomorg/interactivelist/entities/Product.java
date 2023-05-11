@@ -19,7 +19,7 @@ public class Product {
     @Column(name = "product_year")
     private Integer year;
     private String genre;
-    private String platatform;
+    private String platform;
     private Double score;
     private String imgUrl;
     private String shortDescription;
@@ -36,7 +36,7 @@ public class Product {
         this.title = title;
         this.year = year;
         this.genre = genre;
-        this.platatform = platatform;
+        this.platform = platatform;
         this.score = score;
         this.imgUrl = imgUrl;
         this.shortDescription = shortDescription;
@@ -76,11 +76,11 @@ public class Product {
     }
 
     public String getPlatatform() {
-        return platatform;
+        return platform;
     }
 
     public void setPlatatform(String platatform) {
-        this.platatform = platatform;
+        this.platform = platatform;
     }
 
     public Double getScore() {

@@ -11,7 +11,6 @@ public class ProductMinDTO {
     private String shortDescription;
 
     public ProductMinDTO(){
-
     }
 
     public ProductMinDTO(Product entity){
