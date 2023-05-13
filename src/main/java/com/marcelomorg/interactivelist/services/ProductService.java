@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.marcelomorg.interactivelist.dtos.ProductDTO;
+import com.marcelomorg.interactivelist.dtos.ProductListContentDTO;
 import com.marcelomorg.interactivelist.dtos.ProductMinDTO;
 import com.marcelomorg.interactivelist.entities.Product;
+import com.marcelomorg.interactivelist.projections.ParametersProjection;
 import com.marcelomorg.interactivelist.repositories.ProductRepository;
 
 @Service
@@ -50,6 +52,12 @@ public class ProductService {
             return erro;
         }
 
+    }
+    @Transactional(readOnly = true)
+    public List<ProductListContentDTO> findByProductsInList(Long idList){
+        List<ParametersProjection> result = productRepository.findByList(idList);
+        List<ProductListContentDTO> dtoResult = result.stream().map(item -> new ProductListContentDTO(item)).toList();
+        return dtoResult;
     }
 
 }

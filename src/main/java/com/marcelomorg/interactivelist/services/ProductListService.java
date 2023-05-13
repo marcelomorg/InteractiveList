@@ -24,6 +24,7 @@ public class ProductListService {
         return dtoResult;
     }
     
+    @Transactional
     public ProductListDTO findById(Long id){  
 
         try{
