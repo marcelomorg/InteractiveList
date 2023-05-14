@@ -38,4 +38,12 @@ public class ProductListController {
     public List<ProductListContentDTO> findByProductsInList(@PathVariable Long id){
         return productService.findByProductsInList(id);
     }
+
+    /*Attention. Then change from GET to POST*/
+    @GetMapping(value = "/{idList}/{sourceIndex}/{destinationIndex}")
+    public boolean updateListPosition(@PathVariable Long idList, @PathVariable int sourceIndex, @PathVariable int destinationIndex){
+      
+        productListService.updateListPosition(idList, sourceIndex, destinationIndex);
+        return true;
+    }
 }

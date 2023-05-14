@@ -8,13 +8,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.marcelomorg.interactivelist.dtos.ProductListDTO;
 import com.marcelomorg.interactivelist.entities.ProductList;
+import com.marcelomorg.interactivelist.projections.ParametersProjection;
 import com.marcelomorg.interactivelist.repositories.ProductListRepositoty;
+import com.marcelomorg.interactivelist.repositories.ProductRepository;
 
 @Service
 public class ProductListService {
     
     @Autowired
     private ProductListRepositoty productListRepositoty;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Transactional(readOnly = true)
     public List<ProductListDTO> findAll(){
@@ -24,7 +29,7 @@ public class ProductListService {
         return dtoResult;
     }
     
-    @Transactional
+    @Transactional (readOnly = true)
     public ProductListDTO findById(Long id){  
 
         try{
@@ -39,6 +44,21 @@ public class ProductListService {
             erro.setId(id);
             erro.setName("Not Found");
             return erro;
+        }
+    }
+
+    @Transactional
+    public void updateListPosition(Long listId, int sourceIndex, int destinationIndex){
+
+        List<ParametersProjection> list = productRepository.findByList(listId);
+        ParametersProjection produto = list.remove(sourceIndex);
+        list.add(destinationIndex, produto);
+
+        int min = sourceIndex < destinationIndex ? sourceIndex : destinationIndex;
+        int max = sourceIndex > destinationIndex ? sourceIndex : destinationIndex;
+
+        for(int i = min; i <= max; i++){
+            productListRepositoty.updateBelongListPosition(i, listId, list.get(i).getId());
         }
     }
 

@@ -53,6 +53,7 @@ public class ProductService {
         }
 
     }
+    
     @Transactional(readOnly = true)
     public List<ProductListContentDTO> findByProductsInList(Long idList){
         List<ParametersProjection> result = productRepository.findByList(idList);

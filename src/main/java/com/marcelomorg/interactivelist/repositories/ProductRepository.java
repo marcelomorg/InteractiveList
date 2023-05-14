@@ -1,6 +1,5 @@
 package com.marcelomorg.interactivelist.repositories;
 
-
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,6 +20,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
         INNER JOIN tb_products_list
         ON tb_products_list.id = tb_belong.productlist_id
         WHERE tb_products_list.id = :idList
+        ORDER BY tb_belong.position ASC
             """)
     List<ParametersProjection> findByList(Long idList);
 }
