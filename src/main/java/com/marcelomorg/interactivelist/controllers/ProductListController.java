@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,8 +40,7 @@ public class ProductListController {
         return productService.findByProductsInList(id);
     }
 
-    /*Attention. Then change from GET to POST*/
-    @GetMapping(value = "/{idList}/{sourceIndex}/{destinationIndex}")
+    @PostMapping(value = "/{idList}/{sourceIndex}/{destinationIndex}")
     public boolean updateListPosition(@PathVariable Long idList, @PathVariable int sourceIndex, @PathVariable int destinationIndex){
       
         productListService.updateListPosition(idList, sourceIndex, destinationIndex);
